@@ -3,12 +3,11 @@ declare(strict_types=1);
 
 namespace DosFarma\TestingBundle\DependecyInjection\Compiler;
 
-use DosFarma\Testing\Behaviour\AMQP\Connection;
+use DosFarma\Testing\Behaviour\AMQP\AmqpConnectionFactory;
 use DosFarma\Testing\Behaviour\AMQP\RabbitMQManager;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Reference;
 
 final class RabbitMQManagerPass implements CompilerPassInterface
 {
@@ -17,19 +16,26 @@ final class RabbitMQManagerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
 
-        if (false === $container->hasDefinition(Connection::class)) {
+        if (false === $container->hasDefinition(AmqpConnectionFactory::class)) {
             throw new \Exception(
-                \sprintf('Must have %s definition in Symfony Service Container', Connection::class)
+                \sprintf('Must have %s definition in Symfony Service Container', AmqpConnectionFactory::class)
             );
         }
 
         $dsn = $container->getParameter(self::TESTING_HOST_PARAMETER_NAME);
 
+        $AmqpConnection = new Definition(
+            AmqpConnectionFactory::class,
+            [
+                $dsn,
+            ],
+        );
+        $AmqpConnection->setFactory('fromDsn');
+
         $rabbitMQManagerDefinition = new Definition(
             RabbitMQManager::class,
             [
-                new Reference(Connection::class),
-                $dsn,
+                $AmqpConnection,
             ],
         );
 
