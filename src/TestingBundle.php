@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace DosFarma\TestingBundle;
 
 use DosFarma\TestingBundle\DependecyInjection\Compiler\GuzzleHttpApiCallsManagerPass;
+use DosFarma\TestingBundle\DependecyInjection\Compiler\RabbitMQManagerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -15,6 +16,10 @@ final class TestingBundle extends Bundle
 
         $container->addCompilerPass(
             new GuzzleHttpApiCallsManagerPass(),
+        );
+
+        $container->addCompilerPass(
+            new RabbitMQManagerPass(),
         );
     }
 }

@@ -1,4 +1,3 @@
-
 FROM php:7.4-cli-alpine3.11
 
 RUN apk update && \
@@ -7,6 +6,8 @@ RUN apk update && \
         openssl-dev && \
     docker-php-ext-install -j$(nproc) \
         zip
+
+RUN docker-php-ext-install sockets
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 
