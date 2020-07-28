@@ -5,6 +5,7 @@ namespace DosFarma\TestingBundle\DependecyInjection\Compiler;
 
 use DosFarma\Testing\Behaviour\AMQP\AmqpConnectionFactory;
 use DosFarma\Testing\Behaviour\AMQP\RabbitMQManager;
+use PhpAmqpLib\Connection\AMQPStreamConnection;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -25,12 +26,12 @@ final class RabbitMQManagerPass implements CompilerPassInterface
         $dsn = $container->getParameter(self::TESTING_HOST_PARAMETER_NAME);
 
         $AmqpConnection = new Definition(
-            AmqpConnectionFactory::class,
+            AMQPStreamConnection::class,
             [
                 $dsn,
             ],
         );
-        $AmqpConnection->setFactory('fromDsn');
+        $AmqpConnection->setFactory(AmqpConnectionFactory::class . '::fromDsn');
 
         $rabbitMQManagerDefinition = new Definition(
             RabbitMQManager::class,
