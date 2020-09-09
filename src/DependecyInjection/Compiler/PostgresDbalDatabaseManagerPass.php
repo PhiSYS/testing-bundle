@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace DosFarma\TestingBundle\DependecyInjection\Compiler;
 
-use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use DosFarma\Testing\Behaviour\Database\Dbal\PostgresDbalDatabaseManager;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
