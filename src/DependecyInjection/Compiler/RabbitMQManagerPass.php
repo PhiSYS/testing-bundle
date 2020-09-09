@@ -16,12 +16,6 @@ final class RabbitMQManagerPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if (false === $container->hasDefinition(AmqpConnectionFactory::class)) {
-            throw new \Exception(
-                \sprintf('Must have %s definition in Symfony Service Container', AmqpConnectionFactory::class)
-            );
-        }
-
         $dsn = $container->getParameter(self::TESTING_HOST_PARAMETER_NAME);
 
         $AmqpConnection = new Definition(

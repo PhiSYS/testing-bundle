@@ -18,7 +18,7 @@ final class GuzzleHttpApiCallsManagerPass implements CompilerPassInterface
     {
         if (false === $container->hasDefinition(Client::class)) {
             throw new \Exception(
-                \sprintf('Must have %s definition in Symfony Service Container', Client::class)
+                \sprintf('Must have %s definition in Symfony Service Container', Client::class),
             );
         }
 
