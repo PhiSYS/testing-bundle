@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace DosFarma\TestingBundle\DependecyInjection\Compiler;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DriverManager;
 use DosFarma\Testing\Behaviour\Database\Dbal\PostgresDbalDatabaseManager;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -15,21 +16,19 @@ class PostgresDbalDatabaseManagerPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if (false === $container->hasDefinition(Connection::class)) {
-            throw new \Exception(
-                \sprintf('Must have %s definition in Symfony Service Container', Connection::class)
-            );
-        }
-
         $connection = $container->getParameter(self::TESTING_DATABASE_DSN);
 
         $databaseManagerDefinition = new Definition(
             PostgresDbalDatabaseManager::class,
-            [$connection]
+            [
+                [ 'url' => $connection],
+            ],
         );
 
+        $databaseManagerDefinition->setFactory( DriverManager::class . '::getConnection');
+
         $container->addDefinitions(
-            [PostgresDbalDatabaseManager::class => $databaseManagerDefinition->setPublic(true)]
+            [PostgresDbalDatabaseManager::class => $databaseManagerDefinition->setPublic(true)],
         );
     }
 }

@@ -17,13 +17,13 @@ final class TestingBundle extends Bundle
 
         $container
             ->addCompilerPass(
-                new GuzzleHttpApiCallsManagerPass()
+                new GuzzleHttpApiCallsManagerPass(),
             )
             ->addCompilerPass(
-                new RabbitMQManagerPass()
+                new RabbitMQManagerPass(),
             )
             ->addCompilerPass(
-                new PostgresDbalDatabaseManagerPass()
+                new PostgresDbalDatabaseManagerPass(),
             )
         ;
     }
