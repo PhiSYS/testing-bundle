@@ -4,8 +4,6 @@ declare(strict_types=1);
 namespace DosFarma\TestingBundle\DependecyInjection\Compiler;
 
 use DosFarma\Testing\Behaviour\Bus\SymfonyMessengerBusManager;
-use PcComponentes\Ddd\Util\Message\Serialization\JsonApi\AggregateMessageStreamDeserializer;
-use PcComponentes\Ddd\Util\Message\Serialization\JsonApi\SimpleMessageStreamDeserializer;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -22,6 +20,8 @@ final class SymfonyMessengerBusManagerPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
+        $this->assertBuses($container);
+
         $busManagerDefinition = new Definition(
             SymfonyMessengerBusManager::class,
             [
@@ -39,5 +39,32 @@ final class SymfonyMessengerBusManagerPass implements CompilerPassInterface
                 SymfonyMessengerBusManager::class => $busManagerDefinition->setPublic(true),
             ],
         );
+    }
+
+    private function assertBuses(ContainerBuilder $container): void
+    {
+        if (false === $container->has(self::PUBLISH_EVENT_BUS)) {
+            throw new \Exception(
+                \sprintf('Must have %s definition in Symfony Service Container', self::PUBLISH_EVENT_BUS),
+            );
+        }
+
+        if (false === $container->has(self::EXECUTE_EVENT_BUS)) {
+            throw new \Exception(
+                \sprintf('Must have %s definition in Symfony Service Container', self::EXECUTE_EVENT_BUS),
+            );
+        }
+
+        if (false === $container->has(self::PUBLISH_COMMAND_BUS)) {
+            throw new \Exception(
+                \sprintf('Must have %s definition in Symfony Service Container', self::PUBLISH_COMMAND_BUS),
+            );
+        }
+
+        if (false === $container->has(self::EXECUTE_COMMAND_BUS)) {
+            throw new \Exception(
+                \sprintf('Must have %s definition in Symfony Service Container', self::EXECUTE_COMMAND_BUS),
+            );
+        }
     }
 }
