@@ -4,8 +4,6 @@ declare(strict_types=1);
 namespace DosFarma\TestingBundle\DependecyInjection\Compiler;
 
 use DosFarma\Testing\Behaviour\Bus\SymfonyMessengerBusManager;
-use PcComponentes\Ddd\Util\Message\Serialization\JsonApi\AggregateMessageStreamDeserializer;
-use PcComponentes\Ddd\Util\Message\Serialization\JsonApi\SimpleMessageStreamDeserializer;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
