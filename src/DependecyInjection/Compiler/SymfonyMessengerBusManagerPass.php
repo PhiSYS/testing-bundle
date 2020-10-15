@@ -21,8 +21,6 @@ final class SymfonyMessengerBusManagerPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        $this->assertDependencies($container);
-
         $busManagerDefinition = new Definition(
             SymfonyMessengerBusManager::class,
             [
@@ -30,8 +28,8 @@ final class SymfonyMessengerBusManagerPass implements CompilerPassInterface
                 new Reference(self::EXECUTE_EVENT_BUS),
                 new Reference(self::PUBLISH_COMMAND_BUS),
                 new Reference(self::EXECUTE_COMMAND_BUS),
-                new Reference(AggregateMessageStreamDeserializer::class),
-                new Reference(SimpleMessageStreamDeserializer::class),
+                new Definition(AggregateMessageStreamDeserializer::class),
+                new Definition(SimpleMessageStreamDeserializer::class),
             ]
         );
 
@@ -40,44 +38,5 @@ final class SymfonyMessengerBusManagerPass implements CompilerPassInterface
                 SymfonyMessengerBusManager::class => $busManagerDefinition->setPublic(true),
             ],
         );
-    }
-
-    private function assertDependencies(ContainerBuilder $container): void
-    {
-        if (false === $container->hasAlias(self::PUBLISH_EVENT_BUS)) {
-            throw new \Exception(
-                \sprintf('Must have %s definition in Symfony Service Container', self::PUBLISH_EVENT_BUS),
-            );
-        }
-
-        if (false === $container->hasAlias(self::EXECUTE_EVENT_BUS)) {
-            throw new \Exception(
-                \sprintf('Must have %s definition in Symfony Service Container', self::EXECUTE_EVENT_BUS),
-            );
-        }
-
-        if (false === $container->hasAlias(self::PUBLISH_COMMAND_BUS)) {
-            throw new \Exception(
-                \sprintf('Must have %s definition in Symfony Service Container', self::PUBLISH_COMMAND_BUS),
-            );
-        }
-
-        if (false === $container->hasAlias(self::EXECUTE_COMMAND_BUS)) {
-            throw new \Exception(
-                \sprintf('Must have %s definition in Symfony Service Container', self::EXECUTE_COMMAND_BUS),
-            );
-        }
-
-        if (false === $container->hasDefinition(AggregateMessageStreamDeserializer::class)) {
-            throw new \Exception(
-                \sprintf('Must have %s definition in Symfony Service Container', AggregateMessageStreamDeserializer::class),
-            );
-        }
-
-        if (false === $container->hasDefinition(SimpleMessageStreamDeserializer::class)) {
-            throw new \Exception(
-                \sprintf('Must have %s definition in Symfony Service Container', SimpleMessageStreamDeserializer::class),
-            );
-        }
     }
 }
