@@ -17,6 +17,8 @@ final class SymfonyMessengerBusManagerPass implements CompilerPassInterface
     private const EXECUTE_COMMAND_BUS = 'execute_command.bus';
     private const AGGREGATE_MESSAGE_DESERIALIZER = 'pccom.messenger_bundle.aggregate_message.serializer.stream_deserializer';
     private const SIMPLE_MESSAGE_DESERIALIZER = 'pccom.messenger_bundle.simple_message.serializer.stream_deserializer';
+    private const AGGREGATE_MESSAGE_SERIALIZER = 'pccom.messenger_bundle.aggregate_message.serializer.json_api_serializer';
+    private const SIMPLE_MESSAGE_SERIALIZER = 'pccom.messenger_bundle.simple_message.serializer.json_api_serializer';
 
     public function process(ContainerBuilder $container)
     {
@@ -31,6 +33,8 @@ final class SymfonyMessengerBusManagerPass implements CompilerPassInterface
                 new Reference(self::EXECUTE_COMMAND_BUS),
                 new Reference(self::AGGREGATE_MESSAGE_DESERIALIZER),
                 new Reference(self::SIMPLE_MESSAGE_DESERIALIZER),
+                new Reference(self::AGGREGATE_MESSAGE_SERIALIZER),
+                new Reference(self::SIMPLE_MESSAGE_SERIALIZER),
             ],
         );
 
