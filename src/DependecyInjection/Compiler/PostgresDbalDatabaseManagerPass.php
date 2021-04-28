@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class PostgresDbalDatabaseManagerPass implements CompilerPassInterface
 {
-    private const TESTING_DATABASE_DSN = 'dos_farma.testing.acceptance_tests.db.dsn';
+    private const TESTING_DATABASE_DSN = 'testing_bundle.acceptance_tests.db.dsn';
 
     public function process(ContainerBuilder $container)
     {
