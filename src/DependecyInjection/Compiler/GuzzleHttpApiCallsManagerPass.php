@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class GuzzleHttpApiCallsManagerPass implements CompilerPassInterface
 {
-    private const TESTING_HOST_PARAMETER_NAME = 'testing_bundle.acceptance_tests.api.host';
+    private const TESTING_HOST_PARAMETER_NAME = 'phisys.testing_bundle.acceptance_tests.api.host';
 
     public function process(ContainerBuilder $container)
     {

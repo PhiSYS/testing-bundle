@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 final class RabbitMQManagerPass implements CompilerPassInterface
 {
-    private const TESTING_HOST_PARAMETER_NAME = 'testing_bunlde.acceptance_tests.rabbitmq.host';
+    private const TESTING_HOST_PARAMETER_NAME = 'phisys.testing_bunlde.acceptance_tests.rabbitmq.host';
 
     public function process(ContainerBuilder $container)
     {
