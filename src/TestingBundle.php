@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace DosFarma\TestingBundle;
+namespace PhiSYS\TestingBundle;
 
-use DosFarma\TestingBundle\DependecyInjection\Compiler\GuzzleHttpApiCallsManagerPass;
-use DosFarma\TestingBundle\DependecyInjection\Compiler\PostgresDbalDatabaseManagerPass;
-use DosFarma\TestingBundle\DependecyInjection\Compiler\RabbitMQManagerPass;
-use DosFarma\TestingBundle\DependecyInjection\Compiler\SymfonyMessengerBusManagerPass;
+use PhiSYS\TestingBundle\DependecyInjection\Compiler\GuzzleHttpApiCallsManagerPass;
+use PhiSYS\TestingBundle\DependecyInjection\Compiler\PostgresDbalDatabaseManagerPass;
+use PhiSYS\TestingBundle\DependecyInjection\Compiler\RabbitMQManagerPass;
+use PhiSYS\TestingBundle\DependecyInjection\Compiler\SymfonyMessengerBusManagerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

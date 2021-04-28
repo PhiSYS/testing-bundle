@@ -1,23 +1,28 @@
 {
-  "name": "dosfarma/testing-bundle",
-  "description": "Symfony framework integration bundle for dosfarma/testing tools",
+  "name": "phisys/testing-bundle",
+  "description": "Symfony framework integration bundle for phisys/testing tools",
   "type": "symfony-bundle",
   "authors": [
     {
-      "name": "Sergio Hernández Martínez",
-      "email": "sergio.hernandez@dosfarma.com"
+      "name": "Sergio Hernández Martínez"
+    },
+    {
+      "name": "José Ramón Flores Munuera"
+    },
+    {
+      "name": "David Strencsev Gómez"
     }
   ],
   "license": "MIT",
   "require": {
-    "php": "^7.4",
-    "dosfarma/testing": "dev-master",
-    "symfony/http-kernel": "^4.4",
+    "php": "^7.4|^8",
+    "phisys/testing": "^1",
+    "symfony/http-kernel": "^4.4|^5",
     "symfony/dependency-injection": "^4.4.1|^5.0.1"
   },
   "autoload": {
     "psr-4": {
-      "DosFarma\\TestingBundle\\": "src/"
+      "PhiSYS\\TestingBundle\\": "src/"
     }
   }
 }

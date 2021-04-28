@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace DosFarma\TestingBundle\DependecyInjection\Compiler;
+namespace PhiSYS\TestingBundle\DependecyInjection\Compiler;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
-use DosFarma\Testing\Behaviour\Database\Dbal\PostgresDbalDatabaseManager;
+use PhiSYS\Testing\Behaviour\Database\Dbal\PostgresDbalDatabaseManager;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;

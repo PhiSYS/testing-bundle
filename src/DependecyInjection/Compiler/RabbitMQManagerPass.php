@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace DosFarma\TestingBundle\DependecyInjection\Compiler;
+namespace PhiSYS\TestingBundle\DependecyInjection\Compiler;
 
-use DosFarma\Testing\Behaviour\AMQP\AmqpConnectionFactory;
-use DosFarma\Testing\Behaviour\AMQP\RabbitMQManager;
+use PhiSYS\Testing\Behaviour\AMQP\AmqpConnectionFactory;
+use PhiSYS\Testing\Behaviour\AMQP\RabbitMQManager;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace DosFarma\TestingBundle\DependecyInjection\Compiler;
+namespace PhiSYS\TestingBundle\DependecyInjection\Compiler;
 
-use DosFarma\Testing\Behaviour\ApiRest\GuzzleHttpApiCallsManager;
+use PhiSYS\Testing\Behaviour\ApiRest\GuzzleHttpApiCallsManager;
 use GuzzleHttp\Client;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

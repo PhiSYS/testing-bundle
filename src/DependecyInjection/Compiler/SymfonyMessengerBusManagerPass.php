@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace DosFarma\TestingBundle\DependecyInjection\Compiler;
+namespace PhiSYS\TestingBundle\DependecyInjection\Compiler;
 
-use DosFarma\Testing\Behaviour\Bus\SymfonyMessengerBusManager;
+use PhiSYS\Testing\Behaviour\Bus\SymfonyMessengerBusManager;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;

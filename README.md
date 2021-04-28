@@ -1,2 +1,2 @@
 # Testing Bundle
-Symfony framework integration for dosfarma/testing tools
+Symfony framework integration for phisys/testing tools
