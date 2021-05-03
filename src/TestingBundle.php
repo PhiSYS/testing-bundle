@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace PhiSYS\TestingBundle;
 
 use PhiSYS\TestingBundle\DependecyInjection\Compiler\GuzzleHttpApiCallsManagerPass;
-use PhiSYS\TestingBundle\DependecyInjection\Compiler\PostgresDbalDatabaseManagerPass;
+use PhiSYS\TestingBundle\DependecyInjection\Compiler\DbalDatabaseManagerPass;
 use PhiSYS\TestingBundle\DependecyInjection\Compiler\RabbitMQManagerPass;
 use PhiSYS\TestingBundle\DependecyInjection\Compiler\SymfonyMessengerBusManagerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -24,7 +24,7 @@ final class TestingBundle extends Bundle
                 new RabbitMQManagerPass(),
             )
             ->addCompilerPass(
-                new PostgresDbalDatabaseManagerPass(),
+                new DbalDatabaseManagerPass(),
             )
             ->addCompilerPass(
                 new SymfonyMessengerBusManagerPass(),
