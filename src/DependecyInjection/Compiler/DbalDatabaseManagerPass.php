@@ -17,48 +17,31 @@ class DbalDatabaseManagerPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        $dsn = $container->getParameter(self::TESTING_DATABASE_DSN);
-
-        $databaseManagerClass = $this->getDatabaseManagerClass($dsn);
-
         $connection = new Definition(
             Connection::class,
             [
-                ['url' => $dsn],
+                ['url' => $container->getParameter(self::TESTING_DATABASE_DSN)],
             ],
         );
 
         $connection->setFactory(DriverManager::class . '::getConnection');
 
-        $databaseManagerDefinition = new Definition(
-            $databaseManagerClass,
-            [
-                $connection,
-            ],
-        );
+        $databaseManagerClasses = [
+            MysqlDbalDatabaseManager::class,
+            PostgresDbalDatabaseManager::class,
+        ];
 
-        $container->addDefinitions(
-            [$databaseManagerClass => $databaseManagerDefinition->setPublic(true)],
-        );
-    }
+        foreach($databaseManagerClasses as $databaseManagerClass) {
+            $databaseManagerDefinition = new Definition(
+                $databaseManagerClass,
+                [
+                    $connection,
+                ],
+            );
 
-    private function getDatabaseManagerClass($dsn): string
-    {
-        if (1 !== preg_match('/^([^:]+):\/\//', $dsn, $matches)) {
-            throw new \InvalidArgumentException("Invalid DSN format, should be driver:// shape.");
+            $container->addDefinitions(
+                [$databaseManagerClass => $databaseManagerDefinition->setPublic(true)],
+            );
         }
-
-        switch ($matches[1]) {
-            case 'mysql':
-                $databaseManagerClass = MysqlDbalDatabaseManager::class;
-                break;
-            case 'postgresql':
-                $databaseManagerClass = PostgresDbalDatabaseManager::class;
-                break;
-            default:
-                throw new \InvalidArgumentException('DSN not supported by phisys/testing library.');
-        }
-
-        return $databaseManagerClass;
     }
 }
