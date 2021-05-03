@@ -44,8 +44,8 @@ class DbalDatabaseManagerPass implements CompilerPassInterface
 
     private function getDatabaseManagerClass($dsn): string
     {
-        if (1 !== preg_match('/^([^:]):/', $dsn, $matches)) {
-            throw new \InvalidArgumentException("Invalid DSN format");
+        if (1 !== preg_match('/^([^:]+):\/\//', $dsn, $matches)) {
+            throw new \InvalidArgumentException("Invalid DSN format, should be driver:// shape.");
         }
 
         switch ($matches[1]) {
@@ -56,7 +56,7 @@ class DbalDatabaseManagerPass implements CompilerPassInterface
                 $databaseManagerClass = PostgresDbalDatabaseManager::class;
                 break;
             default:
-                throw new \InvalidArgumentException('DSN not supported by phisys/testing library');
+                throw new \InvalidArgumentException('DSN not supported by phisys/testing library.');
         }
 
         return $databaseManagerClass;
